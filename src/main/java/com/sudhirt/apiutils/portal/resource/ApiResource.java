@@ -1,23 +1,38 @@
 package com.sudhirt.apiutils.portal.resource;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.sudhirt.apiutils.portal.constant.ApiStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Email;
+import org.springframework.hateoas.ResourceSupport;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class ApiResource implements Serializable {
+@JsonPropertyOrder({"id", "application", "contact", "version", "releaseDate", "endOfLife", "status"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ApiResource extends ResourceSupport implements Serializable {
 
     private static final long serialVersionUID = -3751624559434980709L;
 
-    private String id;
+    @JsonProperty("id")
+    private String identifier;
+    @NotNull
     private String application;
+    @NotNull
+    @Email
     private String contact;
     private ApiStatus status;
     private Date releaseDate;
     private Date endOfLife;
+    @NotNull
     private String version;
-    private String swaggerJson;
 }

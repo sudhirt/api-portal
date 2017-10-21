@@ -21,7 +21,6 @@ public class ApiDataHelper {
             api.setContact("test\"+index+\"@test\"+index+\".com");
             api.setStatus(status);
             api.setVersion(version);
-            api.setSwaggerJson("{'key':'value'}");
             apis.add(api);
         }
         return apis;

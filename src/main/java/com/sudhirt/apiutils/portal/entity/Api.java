@@ -2,6 +2,7 @@ package com.sudhirt.apiutils.portal.entity;
 
 import com.sudhirt.apiutils.portal.constant.ApiStatus;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -16,7 +17,8 @@ public class Api implements Serializable {
     private static final long serialVersionUID = -7282713304997015713L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
     @Column(nullable = false)
     private String application;
@@ -31,7 +33,7 @@ public class Api implements Serializable {
     private Date endOfLife;
     @Column(nullable = false)
     private String version;
-    @Column(columnDefinition = "clob", nullable = false)
+    @Column(columnDefinition = "TEXT")
     @Lob
     private String swaggerJson;
     @CreatedDate

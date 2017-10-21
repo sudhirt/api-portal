@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/api
+    username: postgres
+    password: sa
+    driver-class: org.postgresql.Driver
+    platform: postgres
+    initialize: true
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL94Dialect
+  devtools:
+    restart:
+      exclude: static/**,public/**
+  jackson:
+    default-property-inclusion: NON_NULL

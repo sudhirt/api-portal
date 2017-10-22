@@ -12,6 +12,5 @@ public abstract class ResourceMapper {
     public abstract ResourceDTO toResource(Resource api);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "status", source = "status", defaultValue = "DEVELOPMENT")
     public abstract Resource toEntity(ResourceDTO apiResource);
 }

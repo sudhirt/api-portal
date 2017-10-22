@@ -4,15 +4,17 @@ import com.sudhirt.apiutils.portal.constant.ApiStatus;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
-@Table
 @Data
-public class Resource implements Serializable {
+public class Resource extends AbstractAuditableEntity {
 
     private static final long serialVersionUID = -7282713304997015713L;
 
@@ -24,18 +26,13 @@ public class Resource implements Serializable {
     private String application;
     @Column(nullable = false)
     private String contact;
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private ApiStatus status;
-    @Column
-    private Date releaseDate;
-    @Column
-    private Date endOfLife;
-    @Column(nullable = false)
-    private String version;
-    @Column(columnDefinition = "TEXT")
-    @Lob
-    private String swaggerJson;
-    @CreatedDate
-    private Date createdDate;
+    @OneToMany(mappedBy = "resource")
+    private Collection<Api> apis;
+
+    public void addApi(Api api) {
+        if(apis == null) {
+            apis = new ArrayList<>();
+        }
+        apis.add(api);
+    }
 }

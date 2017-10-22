@@ -30,9 +30,4 @@ public class ResourceDTO extends ResourceSupport implements Serializable {
     @NotNull
     @Email
     private String contact;
-    private ApiStatus status;
-    private Date releaseDate;
-    private Date endOfLife;
-    @NotNull
-    private String version;
 }

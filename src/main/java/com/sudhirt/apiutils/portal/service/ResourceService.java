@@ -19,32 +19,16 @@ public class ResourceService {
     }
 
     public Resource get(String id) {
-        Resource api = repository.findOne(id);
-        if (api != null) {
-            return api;
+        Resource resource = repository.findOne(id);
+        if (resource != null) {
+            resource.getApis();
+            return resource;
         } else {
             throw new NotFoundException(id);
         }
     }
 
-    public Resource save(Resource api) {
-        return repository.save(api);
-    }
-
-    public void update(String id, String json) {
-        try {
-            JSONUtil.parseJSON(json);
-            Resource api = repository.findOne(id);
-            if (api != null) {
-                api.setSwaggerJson(json);
-                repository.save(api);
-            } else {
-                throw new NotFoundException(id);
-            }
-        } catch(IOException e) {
-            InvalidInputException ex = new InvalidInputException();
-            ex.addDetail("Invalid JSON provided");
-            throw ex;
-        }
+    public Resource save(Resource resource) {
+        return repository.save(resource);
     }
 }

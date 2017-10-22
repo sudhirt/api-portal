@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -19,13 +20,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JpaConfigTest {
 
     @Autowired
-    private ResourceService apiService;
+    private ResourceService resourceService;
 
     @Test
-    public void created_by_populated_for_saved_entities() {
-        Resource savedApi = apiService.save(ApiDataHelper.createApi(1)
+    public void audit_fields_populated_for_saved_entities() {
+        Resource savedResource = resourceService.save(ApiDataHelper.createResource(1)
                 .iterator()
                 .next());
-        assertThat(savedApi).isNotNull();
+        savedResource = resourceService.get(savedResource.getId());
+        assertThat(savedResource).isNotNull();
+        assertThat(savedResource.getCreatedDate()).isNotNull();
+        assertThat(savedResource.getLastModifiedDate()).isNotNull();
     }
 }

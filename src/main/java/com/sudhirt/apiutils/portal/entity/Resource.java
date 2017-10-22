@@ -12,7 +12,7 @@ import java.util.Date;
 @Entity
 @Table
 @Data
-public class Api implements Serializable {
+public class Resource implements Serializable {
 
     private static final long serialVersionUID = -7282713304997015713L;
 

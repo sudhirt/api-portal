@@ -1,6 +1,6 @@
 package com.sudhirt.apiutils.portal.advice;
 
-import com.sudhirt.apiutils.portal.exception.ApiError;
+import com.sudhirt.apiutils.portal.exception.Error;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -17,8 +17,8 @@ public class BindExceptionHandler {
     @ExceptionHandler({ BindException.class })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ApiError handleBindException(BindException ex, WebRequest request) {
-        ApiError exception = new ApiError("INVALID_INPUT");
+    public Error handleBindException(BindException ex, WebRequest request) {
+        Error exception = new Error("INVALID_INPUT");
         ex.getAllErrors().forEach(e -> {
             exception.addDetail(((FieldError) e).getField() + ": " + e.getDefaultMessage());
         });
@@ -28,8 +28,8 @@ public class BindExceptionHandler {
     @ExceptionHandler({ MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ApiError handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
-        ApiError exception = new ApiError("INVALID_INPUT");
+    public Error handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
+        Error exception = new Error("INVALID_INPUT");
         ex.getBindingResult().getAllErrors().forEach(e -> {
             exception.addDetail(((FieldError) e).getField() + ": " + e.getDefaultMessage());
         });

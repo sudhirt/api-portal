@@ -1,8 +1,8 @@
 package com.sudhirt.apiutils.portal.config;
 
-import com.sudhirt.apiutils.portal.entity.Api;
+import com.sudhirt.apiutils.portal.entity.Resource;
 import com.sudhirt.apiutils.portal.helper.ApiDataHelper;
-import com.sudhirt.apiutils.portal.service.ApiService;
+import com.sudhirt.apiutils.portal.service.ResourceService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JpaConfigTest {
 
     @Autowired
-    private ApiService apiService;
+    private ResourceService apiService;
 
     @Test
     public void created_by_populated_for_saved_entities() {
-        Api savedApi = apiService.save(ApiDataHelper.createApi(1)
+        Resource savedApi = apiService.save(ApiDataHelper.createApi(1)
                 .iterator()
                 .next());
         assertThat(savedApi).isNotNull();

@@ -1,25 +1,25 @@
 package com.sudhirt.apiutils.portal.service;
 
-import com.sudhirt.apiutils.portal.entity.Api;
+import com.sudhirt.apiutils.portal.entity.Resource;
 import com.sudhirt.apiutils.portal.exception.InvalidInputException;
 import com.sudhirt.apiutils.portal.exception.NotFoundException;
-import com.sudhirt.apiutils.portal.repository.ApiRepository;
+import com.sudhirt.apiutils.portal.repository.ResourceRepository;
 import com.sudhirt.apiutils.portal.utils.JSONUtil;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
 @Service
-public class ApiService {
+public class ResourceService {
 
-    private final ApiRepository repository;
+    private final ResourceRepository repository;
 
-    public ApiService(ApiRepository repository) {
+    public ResourceService(ResourceRepository repository) {
         this.repository = repository;
     }
 
-    public Api get(String id) {
-        Api api = repository.findOne(id);
+    public Resource get(String id) {
+        Resource api = repository.findOne(id);
         if (api != null) {
             return api;
         } else {
@@ -27,14 +27,14 @@ public class ApiService {
         }
     }
 
-    public Api save(Api api) {
+    public Resource save(Resource api) {
         return repository.save(api);
     }
 
     public void update(String id, String json) {
         try {
             JSONUtil.parseJSON(json);
-            Api api = repository.findOne(id);
+            Resource api = repository.findOne(id);
             if (api != null) {
                 api.setSwaggerJson(json);
                 repository.save(api);

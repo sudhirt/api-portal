@@ -19,7 +19,7 @@ import java.util.Date;
 @Data
 @JsonPropertyOrder({"id", "application", "contact", "version", "releaseDate", "endOfLife", "status"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ApiResource extends ResourceSupport implements Serializable {
+public class ResourceDTO extends ResourceSupport implements Serializable {
 
     private static final long serialVersionUID = -3751624559434980709L;
 

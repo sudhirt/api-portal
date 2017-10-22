@@ -1,10 +1,10 @@
 package com.sudhirt.apiutils.portal.service;
 
-import com.sudhirt.apiutils.portal.entity.Api;
+import com.sudhirt.apiutils.portal.entity.Resource;
 import com.sudhirt.apiutils.portal.exception.InvalidInputException;
 import com.sudhirt.apiutils.portal.exception.NotFoundException;
 import com.sudhirt.apiutils.portal.helper.ApiDataHelper;
-import com.sudhirt.apiutils.portal.repository.ApiRepository;
+import com.sudhirt.apiutils.portal.repository.ResourceRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +22,14 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class ApiServiceTest {
 
     @Autowired
-    private ApiService service;
+    private ResourceService service;
     @Autowired
-    private ApiRepository repository;
+    private ResourceRepository repository;
 
     @Test
     public void save() {
         assertThat(repository.count()).isEqualTo(0);
-        Api savedApi = service.save(ApiDataHelper.createApi(1)
+        Resource savedApi = service.save(ApiDataHelper.createApi(1)
                 .iterator()
                 .next());
         assertThat(savedApi.getId()).isNotNull();
@@ -38,10 +38,10 @@ public class ApiServiceTest {
 
     @Test
     public void save_get_validate() {
-        Api api = ApiDataHelper.createApi(1)
+        Resource api = ApiDataHelper.createApi(1)
                 .iterator()
                 .next();
-        Api savedApi = service.save(api);
+        Resource savedApi = service.save(api);
         savedApi = service.get(savedApi.getId());
         assertThat(savedApi.getApplication()).isEqualTo(api.getApplication());
         assertThat(savedApi.getContact()).isEqualTo(api.getContact());
@@ -57,7 +57,7 @@ public class ApiServiceTest {
 
     @Test
     public void link_valid_json() {
-        Api savedApi = service.save(ApiDataHelper.createApi(1)
+        Resource savedApi = service.save(ApiDataHelper.createApi(1)
                 .iterator()
                 .next());
         assertThat(savedApi.getSwaggerJson()).isNull();
@@ -73,7 +73,7 @@ public class ApiServiceTest {
 
     @Test
     public void link_invalid_json() {
-        Api savedApi = service.save(ApiDataHelper.createApi(1)
+        Resource savedApi = service.save(ApiDataHelper.createApi(1)
                 .iterator()
                 .next());
         assertThat(savedApi.getSwaggerJson()).isNull();

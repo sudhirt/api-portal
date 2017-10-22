@@ -10,24 +10,24 @@ import java.util.Arrays;
 import java.util.List;
 
 @Getter
-public class ApiError implements Serializable {
+public class Error implements Serializable {
 
     private static final long serialVersionUID = 7554020068463996833L;
 
     private String error;
     private List<String> description;
 
-    public ApiError(String error) {
+    public Error(String error) {
         super();
         this.error = error;
     }
 
-    public ApiError(String message, String error) {
+    public Error(String message, String error) {
         super();
         description = Arrays.asList(error);
     }
 
-    public ApiError(String message, List<String> errors) {
+    public Error(String message, List<String> errors) {
         super();
         this.description = errors;
     }

@@ -50,7 +50,7 @@ public class ResourceServiceTest {
                 .next();
         Resource savedResource = resourceService.save(resource);
         savedResource = resourceService.get(savedResource.getId());
-        assertThat(savedResource.getApplication()).isEqualTo(resource.getApplication());
+        assertThat(savedResource.getName()).isEqualTo(resource.getName());
         assertThat(savedResource.getContact()).isEqualTo(resource.getContact());
     }
 

@@ -19,7 +19,7 @@ public class ApiDataHelper {
         Resource api;
         for (int index = 1; index <= count; index++) {
             api = new Resource();
-            api.setApplication("TEST_" + index);
+            api.setName("TEST_" + index);
             api.setContact("test\"+index+\"@test\"+index+\".com");
             apis.add(api);
         }

@@ -23,7 +23,7 @@ public class Resource extends AbstractAuditableEntity {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
     @Column(nullable = false)
-    private String application;
+    private String name;
     @Column(nullable = false)
     private String contact;
     @OneToMany(mappedBy = "resource")

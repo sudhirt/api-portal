@@ -17,7 +17,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@JsonPropertyOrder({"id", "application", "contact", "version", "releaseDate", "endOfLife", "status"})
+@JsonPropertyOrder({"id", "name", "contact", "version", "releaseDate", "endOfLife", "status"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResourceDTO extends ResourceSupport implements Serializable {
 

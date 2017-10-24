@@ -6,11 +6,13 @@ import com.sudhirt.apiutils.portal.exception.InvalidInputException;
 import com.sudhirt.apiutils.portal.exception.NotFoundException;
 import com.sudhirt.apiutils.portal.repository.ApiRepository;
 import com.sudhirt.apiutils.portal.utils.JSONUtil;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ApiService {
@@ -22,9 +24,9 @@ public class ApiService {
     }
 
     public Api get(String resourceId, String version) {
-        Api api = repository.findOne(new ApiKey(resourceId, version));
-        if (api != null) {
-            return api;
+        Optional<Api> apiHolder = repository.findOne(Example.of(new Api().setId(new ApiKey(resourceId, version))));
+        if (apiHolder.isPresent()) {
+            return apiHolder.get();
         } else {
             throw new NotFoundException(resourceId);
         }
@@ -46,10 +48,10 @@ public class ApiService {
     public void update(String resourceId, String version, String json) {
         try {
             JSONUtil.parseJSON(json);
-            Api api = repository.findOne(new ApiKey(resourceId, version));
-            if (api != null) {
-                api.setSwaggerJson(json);
-                repository.save(api);
+            Optional<Api> apiHolder = repository.findOne(Example.of(new Api().setId(new ApiKey(resourceId, version))));
+            if (apiHolder.isPresent()) {
+                apiHolder.get().setSwaggerJson(json);
+                repository.save(apiHolder.get());
             } else {
                 throw new NotFoundException(resourceId + ":" + version);
             }

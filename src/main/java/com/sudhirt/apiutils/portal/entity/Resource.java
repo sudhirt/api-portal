@@ -2,6 +2,7 @@ package com.sudhirt.apiutils.portal.entity;
 
 import com.sudhirt.apiutils.portal.constant.ApiStatus;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -14,6 +15,7 @@ import java.util.Date;
 
 @Entity
 @Data
+@Accessors(chain = true)
 public class Resource extends AbstractAuditableEntity {
 
     private static final long serialVersionUID = -7282713304997015713L;
